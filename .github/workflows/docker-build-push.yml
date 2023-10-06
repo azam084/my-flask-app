@@ -16,7 +16,8 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Your Docker Image
+      - name: Build and Push Docker Image
         run: |
-          docker build -t azam084/my-flask-app .
-          docker push azam084/my-flask-app:latest
+          docker build -t my-flask-app .
+          docker tag my-flask-app ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
