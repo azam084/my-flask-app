@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            
+            {% if logged_in %}
+                <li><a href="/login">Log Out</a></li> <!-- Log Out button -->
+            {% endif %}
+        </ul>
+    </nav>
+
+    <h2>Dashboard</h2>
+    
+    {% if logged_in %}
+        <p>Welcome to the dashboard! You are logged in.</p>
+    {% else %}
+        <p>You are not authorized to access this page. Please <a href="/login">log in</a>.</p>
+    {% endif %}
+</body>
+</html>
