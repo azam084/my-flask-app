@@ -22,7 +22,7 @@ db = mysql.connector.connect(
 @app.route('/')
 def home():
     app.logger.info('Home page accessed.')
-    return 'Welcome to the login page Azam'
+    return 'Welcome to the login page'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
