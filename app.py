@@ -22,7 +22,7 @@ db = mysql.connector.connect(
 @app.route('/')
 def home():
     app.logger.info('Home page accessed.')
-    return 'Welcome to the login page'
+    return 'Welcome to the login page Azam'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -58,6 +58,5 @@ def dashboard():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
-
 
 
