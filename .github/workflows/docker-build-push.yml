@@ -9,6 +9,9 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    env:  # Set environment variables at the job level
+      RDS_ENDPOINT: ${{ secrets.RDS_ENDPOINT }}  # Set the environment variable
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -19,9 +22,6 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t azam084/my-flask-app .
-          env:
-          RDS_ENDPOINT: ${{ secrets.RDS_ENDPOINT }}  # Set the environment variable
-
           docker push azam084/my-flask-app:latest
 
       - name: Deploy to Amazon ECS
