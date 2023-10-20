@@ -21,3 +21,12 @@ jobs:
           docker build -t azam084/my-flask-app .
           docker push azam084/my-flask-app:latest
  
+      
+
+      - name: Deploy to Amazon ECS
+        run: |
+          aws ecs update-service --region eu-west-1 --cluster dev-ecs --service demo-ecs-service --force-new-deployment
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+          AWS_EC2_METADATA_DISABLED: true
