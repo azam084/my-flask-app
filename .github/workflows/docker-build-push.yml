@@ -19,9 +19,10 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t azam084/my-flask-app .
+          env:
+          RDS_ENDPOINT: ${{ secrets.RDS_ENDPOINT }}  # Set the environment variable
+
           docker push azam084/my-flask-app:latest
- 
-      
 
       - name: Deploy to Amazon ECS
         run: |
