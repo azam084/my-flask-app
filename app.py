@@ -1,6 +1,10 @@
 import logging
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
+import os
+
+# Read the RDS endpoint from an environment variable
+rds_endpoint = os.environ.get('RDS_ENDPOINT')
 
 # Configure the logging settings
 logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -13,7 +17,7 @@ app.secret_key = 'Ka20s6480'
 
 # MySQL database connection
 db = mysql.connector.connect(
-    host='dev-demo-rds.c4yrcdfixqfn.eu-west-1.rds.amazonaws.com',
+    host=rds_endpoint,
     user='foo',
     password='foobarbaz',
     database='demo_db'
