@@ -3,25 +3,26 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - main  # Replace with your branch name
+      - main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
-    env:  # Set environment variables at the job level
-      RDS_ENDPOINT: ${{ secrets.RDS_ENDPOINT }}  # Set the environment variable
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: Set MySQL Connection String
+        run: |
+          echo "RDS_ENDPOINT=${{ secrets.RDS_ENDPOINT }}" >> $GITHUB_ENV
+
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker Image
+      - name: Build Docker Image
         run: |
-          docker build -t azam084/my-flask-app .
+          docker build -t azam084/my-flask-app --build-arg RDS_ENDPOINT=$RDS_ENDPOINT .
           docker push azam084/my-flask-app:latest
 
       - name: Deploy to Amazon ECS

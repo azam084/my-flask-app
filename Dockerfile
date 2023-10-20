@@ -19,4 +19,6 @@ ENV NAME World
 # Run app.py when the container launches
 CMD ["python", "app.py"]
 
+ARG RDS_ENDPOINT
 ENV RDS_ENDPOINT=$RDS_ENDPOINT
+
